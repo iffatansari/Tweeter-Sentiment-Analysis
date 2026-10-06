@@ -1,0 +1,61 @@
+# Large model weights
+models/twitter-roberta-base-sentiment/*.bin
+models/twitter-roberta-base-sentiment/*.safetensors
+models/twitter-roberta-base-sentiment/*.h5
+models/twitter-roberta-base-sentiment/*.msgpack
+
+models/sarcasm-deberta-v3/*.bin
+models/sarcasm-deberta-v3/*.safetensors
+
+models/whisper/*.pt
+
+# Checkpoints
+.ipynb_checkpoints/
+
+# Local audio
+*.aiff
+*.wav
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Environment / secrets
+.env
+*.env
+!.env.example
+
+# Data / experiments
+data/
+datasets/
+outputs/
+logs/
+notebooks/
+*.ipynb
+*.csv
+*.parquet
+
+# Hugging Face / model caches
+**/.cache/
+models/**/.cache/
+
+# Large Transformer / Whisper weights
+models/twitter-roberta-base-sentiment/model.safetensors
+models/twitter-roberta-base-sentiment/pytorch_model.bin
+models/sarcasm-deberta-v3/model.safetensors
+models/sarcasm-deberta-v3/pytorch_model.bin
+models/whisper/tiny.pt
+
+# Local test media
+*.aiff
+*.wav
+*.h5
+*.msgpack

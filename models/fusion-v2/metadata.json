@@ -1,0 +1,40 @@
+{
+  "fusion_version": "v2",
+  "task": "3-class Twitter sentiment classification",
+  "dataset": "cardiffnlp/tweet_eval",
+  "splits": {
+    "train": 45615,
+    "validation": 2000,
+    "test": 12284
+  },
+  "feature_names": [
+    "sentiment_negative_probability",
+    "sentiment_neutral_probability",
+    "sentiment_positive_probability",
+    "sarcasm_probability",
+    "emoji_positive",
+    "emoji_negative",
+    "emoji_count",
+    "emoji_present"
+  ],
+  "feature_count": 8,
+  "feature_source": {
+    "sentiment_probabilities": "reused from verified Fusion-v1 cache",
+    "emoji_features": "reused from verified Fusion-v1 cache",
+    "sarcasm_probability": "regenerated with DeBERTa-v3 BESSTIE"
+  },
+  "sarcasm_model": "ppokhrel2109/besstie-sarcasm-deberta-v3",
+  "sarcasm_model_path": "/Users/apple/Downloads/twitter-sentiment-analysis-starter/models/sarcasm-deberta-v3",
+  "sarcasm_temperature": 1.1819,
+  "sarcasm_class_index": 1,
+  "sarcasm_decision_threshold": 0.36,
+  "sarcasm_probability_used_as_feature": true,
+  "fusion_model": "StandardScaler + LogisticRegression",
+  "class_weight": "balanced",
+  "random_state": 42,
+  "max_iterations": 1000,
+  "max_sequence_length": 128,
+  "batch_size": 16,
+  "test_set_used_for_training": false,
+  "note": "Fusion-v2 replaces only the sarcasm feature from Fusion-v1 while preserving the same 8-feature schema and Logistic Regression configuration."
+}

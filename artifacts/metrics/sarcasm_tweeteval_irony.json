@@ -1,0 +1,6 @@
+{
+  "dataset": "TweetEval irony test",
+  "accuracy": 0.6466836734693877,
+  "macro_f1": 0.6452981192476991,
+  "irony_f1": 0.6231292517006802
+}

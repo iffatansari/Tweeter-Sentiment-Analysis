@@ -1,0 +1,27 @@
+# Core
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+
+# NLP / Transformers
+transformers
+datasets
+accelerate
+tokenizers
+sentencepiece
+emoji
+regex
+
+# API
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Notebook
+jupyter
+ipykernel
+
+# Testing
+pytest

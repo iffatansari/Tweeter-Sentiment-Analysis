@@ -1,0 +1,14 @@
+{
+  "dataset": "cardiffnlp/tweet_eval",
+  "config": "sentiment",
+  "splits": {
+    "train": 45615,
+    "validation": 2000,
+    "test": 12284
+  },
+  "labels": {
+    "0": "negative",
+    "1": "neutral",
+    "2": "positive"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "task": "Sarcasm",
+  "base_model": "microsoft/deberta-v3-base",
+  "train_variety": "pooled",
+  "results_file": "deberta_sarcasm_reddit_sarc_pooled.json",
+  "seed": 789,
+  "checkpoint": "checkpoint-711",
+  "selection_rule": "best mean macro-F1 across test varieties; median-validation seed",
+  "thresholds": {
+    "Sarcasm": {
+      "en-UK": 0.35999999999999993,
+      "en-AU": 0.35999999999999993,
+      "en-IN": 0.35999999999999993
+    }
+  },
+  "threshold_space": "temperature-scaled probabilities (matches the app)",
+  "threshold_tuned_on": "validation split",
+  "temperatures": {
+    "Sarcasm": 1.1818772554397583
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "model": "Sarcasm-gated + emoji-aware fusion head",
+  "accuracy": 0.7209378052751547,
+  "macro_f1": 0.72025579485575,
+  "weighted_f1": 0.720798030625771,
+  "note": "Frozen encoder; synthetic emoji augmentation used only for training."
+}

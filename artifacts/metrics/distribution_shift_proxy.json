@@ -1,0 +1,20 @@
+{
+  "reference_distribution": [
+    0.3394433259963989,
+    0.41826775670051575,
+    0.24228893220424652
+  ],
+  "tweet_eval_irony_distribution": [
+    0.3669140040874481,
+    0.3244732618331909,
+    0.30861276388168335
+  ],
+  "tweet_eval_emoji_distribution": [
+    0.03672604262828827,
+    0.42102813720703125,
+    0.5422455668449402
+  ],
+  "kl_reference_to_irony": 0.02116699144244194,
+  "kl_reference_to_emoji": 0.5569244623184204,
+  "interpretation": "cross-task Twitter distribution-shift proxy; not temporal-drift proof"
+}

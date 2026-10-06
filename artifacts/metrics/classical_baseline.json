@@ -1,0 +1,6 @@
+{
+  "model": "TF-IDF(word+char)+LogisticRegression",
+  "accuracy": 0.6114457831325302,
+  "macro_f1": 0.5896797629846989,
+  "weighted_f1": 0.6017664508655225
+}

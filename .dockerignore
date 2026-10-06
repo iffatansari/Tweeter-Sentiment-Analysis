@@ -1,0 +1,14 @@
+.git
+.venv
+__pycache__
+*.pyc
+.DS_Store
+notebooks
+data
+datasets
+outputs
+logs
+*.ipynb
+*.csv
+*.parquet
+models/saved

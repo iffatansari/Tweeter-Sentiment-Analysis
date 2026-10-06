@@ -1,0 +1,11 @@
+FUSION-V2 RESULTS
+
+Validation:
+Accuracy: 0.8120
+Macro-F1: 0.8041
+Weighted-F1: 0.8131
+
+Test:
+Accuracy: 0.7130
+Macro-F1: 0.7136
+Weighted-F1: 0.7110

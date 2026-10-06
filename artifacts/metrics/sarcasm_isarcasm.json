@@ -1,0 +1,8 @@
+{
+  "model": "Frozen Twitter-RoBERTa embeddings + LogisticRegression",
+  "accuracy": 0.6786743515850144,
+  "macro_f1": 0.623826295359142,
+  "sarcastic_f1": 0.4801864801864802,
+  "sarcastic_precision": 0.403921568627451,
+  "sarcastic_recall": 0.5919540229885057
+}
