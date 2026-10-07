@@ -18,19 +18,20 @@ MAX_LENGTH = 128
 
 @lru_cache(maxsize=1)
 def _load_model():
-    if not MODEL_DIR.exists():
-        raise FileNotFoundError(
-            f"Sarcasm model directory not found: {MODEL_DIR}"
-        )
+    has_local_weights = (
+        (MODEL_DIR / "model.safetensors").exists()
+        or (MODEL_DIR / "pytorch_model.bin").exists()
+    )
+    model_source = str(MODEL_DIR) if has_local_weights else "ppokhrel2109/besstie-sarcasm-deberta-v3"
 
     tokenizer = AutoTokenizer.from_pretrained(
-        str(MODEL_DIR),
-        local_files_only=True,
+        model_source,
+        local_files_only=has_local_weights,
     )
 
     model = AutoModelForSequenceClassification.from_pretrained(
-        str(MODEL_DIR),
-        local_files_only=True,
+        model_source,
+        local_files_only=has_local_weights,
     )
 
     model.eval()

@@ -81,19 +81,20 @@ class SentimentPipeline:
         if self._loaded:
             return
 
-        if not self.model_dir.exists():
-            raise FileNotFoundError(
-                f"Sentiment model directory not found: {self.model_dir}"
-            )
+        has_local_weights = (
+            (self.model_dir / "model.safetensors").exists()
+            or (self.model_dir / "pytorch_model.bin").exists()
+        )
+        model_source = str(self.model_dir) if has_local_weights else "cardiffnlp/twitter-roberta-base-sentiment"
 
         self.tokenizer = RobertaTokenizer.from_pretrained(
-            str(self.model_dir),
-            local_files_only=True,
+            model_source,
+            local_files_only=has_local_weights,
         )
 
         self.model = AutoModelForSequenceClassification.from_pretrained(
-            str(self.model_dir),
-            local_files_only=True,
+            model_source,
+            local_files_only=has_local_weights,
         )
 
         self.model.to(self.device)

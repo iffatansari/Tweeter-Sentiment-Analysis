@@ -43,37 +43,35 @@ def main():
     print("\n=== MODEL CHECK ===")
 
     sentiment = (
-        ROOT
-        / "models/twitter-roberta-base-sentiment"
-        / "model.safetensors"
+        (ROOT / "models/twitter-roberta-base-sentiment/model.safetensors").exists()
+        or (ROOT / "models/twitter-roberta-base-sentiment/pytorch_model.bin").exists()
     )
 
     sarcasm = (
-        ROOT
-        / "models/sarcasm-deberta-v3"
-        / "model.safetensors"
+        (ROOT / "models/sarcasm-deberta-v3/model.safetensors").exists()
+        or (ROOT / "models/sarcasm-deberta-v3/pytorch_model.bin").exists()
     )
 
     fusion = (
-        ROOT
-        / "models/fusion/model.joblib"
+        (ROOT / "models/fusion-v2/fusion_classifier.joblib").exists()
+        or (ROOT / "models/fusion/fusion_classifier.joblib").exists()
     )
 
     print(
         "Twitter-RoBERTa:",
-        "READY" if sentiment.exists()
+        "READY" if sentiment
         else "MISSING",
     )
 
     print(
         "DeBERTa sarcasm:",
-        "READY" if sarcasm.exists()
+        "READY" if sarcasm
         else "MISSING",
     )
 
     print(
         "Final fusion:",
-        "READY" if fusion.exists()
+        "READY" if fusion
         else "NOT READY",
     )
 

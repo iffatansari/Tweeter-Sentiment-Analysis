@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SentimentLens</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="notion-sidebar">
+    <!-- Notion Top Bar: Workspace & Engine Status (No dropdown arrow) -->
+    <header class="notion-header">
+      <div class="notion-workspace-btn" id="workspaceHeader">
+        <div class="notion-workspace-avatar">SL</div>
+        <div class="notion-workspace-title">
+          <span class="workspace-name">SentimentLens</span>
+        </div>
+      </div>
+
+      <div class="notion-top-actions">
+        <div class="notion-status-chip" id="statusBadge" title="Local Model Engine Status">
+          <span class="status-dot"></span>
+          <span class="status-text" id="statusLabel">Online</span>
+        </div>
+        <button class="notion-icon-btn" id="refreshBtn" title="Re-check Backend & SHAP">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Scrollable Body: Starts directly with Active Tweet -->
+    <main class="notion-scroll-body">
+      <!-- Empty State -->
+      <div class="notion-empty-view" id="emptyState">
+        <div class="notion-page-icon-empty">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="notion-empty-heading">No Tweet Selected</div>
+        <p class="notion-empty-sub">
+          Click any sentiment pill or <strong>Details &rarr;</strong> on Twitter/X to inspect its full mathematical SHAP breakdown here.
+        </p>
+      </div>
+
+      <!-- Analysis Feed -->
+      <div class="notion-analysis-view" id="analysisReport" style="display: none;">
+
+        <!-- Section: Active Tweet Quote -->
+        <div class="notion-section-title">Active Tweet</div>
+        <div class="notion-quote-block">
+          <div class="notion-quote-bar"></div>
+          <div class="notion-quote-content">
+            <p class="notion-tweet-text" id="tweetContentDisplay">"..."</p>
+          </div>
+        </div>
+
+        <!-- Section: Classification Verdict -->
+        <div class="notion-section-title">Verdict & Confidence</div>
+        <div class="notion-block notion-verdict-block">
+          <div class="verdict-header-row">
+            <div class="verdict-tag-wrap">
+              <span class="notion-pill" id="verdictName">NEUTRAL</span>
+              <span class="notion-sub-pill" id="verdictTag">Fusion-v2</span>
+            </div>
+            <div class="verdict-score-wrap">
+              <span class="verdict-pct" id="dialValue">0%</span>
+            </div>
+          </div>
+          <!-- Notion Blue Track -->
+          <div class="notion-bar-track">
+            <div class="notion-bar-fill" id="meterFill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Section: SHAP Explainability (Notion Callout) -->
+        <div class="notion-section-title">SHAP Explainability</div>
+        <div class="notion-callout-block">
+          <div class="notion-callout-header">
+            <!-- Notion Blue Sparkle Icon -->
+            <div class="notion-sparkle-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L14.39 8.26L21 9.27L16.21 13.88L17.47 20.42L12 17.15L6.53 20.42L7.79 13.88L3 9.27L9.61 8.26L12 2Z"/>
+              </svg>
+            </div>
+            <span class="notion-callout-heading" id="calloutTitle">Why was this verdict chosen?</span>
+          </div>
+
+          <p class="notion-callout-summary" id="calloutText">
+            Computing Shapley feature values...
+          </p>
+
+          <!-- SHAP Feature Contributions Table -->
+          <div class="notion-shap-table">
+            <div class="notion-shap-table-title">Feature Impact Breakdown (SHAP)</div>
+            <div class="notion-shap-list" id="shapDriverList">
+              <!-- Dynamically populated rows -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: Component Model Signals (Premium Vector Icons) -->
+        <div class="notion-section-title">Model Signals</div>
+        <div class="notion-block notion-signals-block">
+          <div class="notion-prop-row">
+            <div class="notion-prop-key">
+              <svg class="notion-prop-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <line x1="10" y1="9" x2="8" y2="9"></line>
+              </svg>
+              <span>Twitter-RoBERTa</span>
+            </div>
+            <span class="notion-prop-val" id="metricRoberta">--</span>
+          </div>
+
+          <div class="notion-prop-row">
+            <div class="notion-prop-key">
+              <svg class="notion-prop-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 11c0 5 4 9 9 9s9-4 9-9-4-7-9-7-9 2-9 7z"></path>
+                <path d="M8.5 9.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+                <path d="M15.5 9.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
+                <path d="M8.5 14.5c1 1.5 2.2 2 3.5 2s2.5-.5 3.5-2"></path>
+              </svg>
+              <span>DeBERTa-v3 Sarcasm</span>
+            </div>
+            <span class="notion-prop-val" id="metricSarcasm">--</span>
+          </div>
+
+          <div class="notion-prop-row">
+            <div class="notion-prop-key">
+              <svg class="notion-prop-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M8 14.5c1 1.2 2.2 1.8 4 1.8s3-.6 4-1.8"></path>
+                <line x1="9" y1="9.5" x2="9.01" y2="9.5" stroke-width="2.2" stroke-linecap="round"></line>
+                <line x1="15" y1="9.5" x2="15.01" y2="9.5" stroke-width="2.2" stroke-linecap="round"></line>
+              </svg>
+              <span>Emoji Lexicon</span>
+            </div>
+            <span class="notion-prop-val" id="metricEmoji">--</span>
+          </div>
+        </div>
+
+        <!-- Section: Class Probability Distribution -->
+        <div class="notion-section-title">Class Probabilities</div>
+        <div class="notion-block notion-probs-block">
+          <div class="notion-prob-row">
+            <span class="notion-prob-label">Negative</span>
+            <div class="notion-prob-track">
+              <div class="notion-prob-fill" id="fillNeg"></div>
+            </div>
+            <span class="notion-prob-num" id="numNeg">0%</span>
+          </div>
+
+          <div class="notion-prob-row">
+            <span class="notion-prob-label">Neutral</span>
+            <div class="notion-prob-track">
+              <div class="notion-prob-fill" id="fillNeu"></div>
+            </div>
+            <span class="notion-prob-num" id="numNeu">0%</span>
+          </div>
+
+          <div class="notion-prob-row">
+            <span class="notion-prob-label">Positive</span>
+            <div class="notion-prob-track">
+              <div class="notion-prob-fill" id="fillPos"></div>
+            </div>
+            <span class="notion-prob-num" id="numPos">0%</span>
+          </div>
+        </div>
+
+        <!-- Section: Extracted Themes -->
+        <div class="notion-section-title">Key Themes</div>
+        <div class="notion-block notion-tags-block">
+          <div class="notion-chips-container" id="themeChips">
+            <span class="notion-chip">#tweet</span>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Notion Bottom Footer (Clean, No Chevrons) -->
+    <footer class="notion-footer">
+      <div class="notion-footer-left">
+        <div class="notion-user-badge">F</div>
+        <span class="notion-user-name">SentimentLens</span>
+      </div>
+      <div class="notion-footer-right">
+        <!-- Notion Signature Blue Sparkle AI Box -->
+        <div class="notion-footer-icon blue-sparkle" title="Notion AI Powered SHAP">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L14.39 8.26L21 9.27L16.21 13.88L17.47 20.42L12 17.15L6.53 20.42L7.79 13.88L3 9.27L9.61 8.26L12 2Z"/>
+          </svg>
+        </div>
+        <div class="notion-footer-icon" title="Documentation">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <div class="notion-footer-icon" title="Menu">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

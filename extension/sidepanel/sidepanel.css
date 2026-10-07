@@ -1,0 +1,637 @@
+/* ==========================================================================
+   SentimentLens — Authentic Notion Dark Theme
+   Meticulously matched to Notion's dark mode sidebar:
+   Background: #202020 | Blocks: #262626 | Accent: Notion Blue #2383e2
+   Typography: Native Apple / Windows Notion System Stack
+   ========================================================================== */
+
+:root {
+  --notion-bg: #202020;
+  --notion-header-bg: #202020;
+  --notion-card-bg: #262626;
+  --notion-card-hover: #2c2c2c;
+  --notion-border: rgba(255, 255, 255, 0.07);
+
+  --notion-text-primary: #ebebeb;
+  --notion-text-secondary: #c7c6c4;
+  --notion-text-muted: #8c8b88;
+  --notion-text-faint: #5e5d5a;
+
+  /* Notion Iconic Blue */
+  --notion-blue: #2383e2;
+  --notion-blue-hover: #1c72c7;
+  --notion-blue-bg: rgba(35, 131, 226, 0.15);
+  --notion-blue-border: rgba(35, 131, 226, 0.3);
+
+  /* Subtle Muted Semantic Tones (Classic, zero neon) */
+  --notion-red: #e06c75;
+  --notion-red-bg: rgba(224, 108, 117, 0.12);
+  --notion-amber: #e5c07b;
+  --notion-amber-bg: rgba(229, 192, 123, 0.12);
+  --notion-green: #98c379;
+  --notion-green-bg: rgba(152, 195, 121, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background-color: var(--notion-bg);
+  color: var(--notion-text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.notion-sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ==========================================================================
+   1. Notion Top Bar: Workspace Header & Status (Clean, no chevron)
+   ========================================================================== */
+
+.notion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 14px;
+  background-color: var(--notion-header-bg);
+  border-bottom: 1px solid var(--notion-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.notion-workspace-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 5px;
+  border-radius: 4px;
+}
+
+.notion-workspace-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background-color: #2e2e2e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--notion-blue);
+}
+
+.notion-workspace-title {
+  display: flex;
+  align-items: center;
+}
+
+.workspace-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--notion-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.notion-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.notion-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--notion-border);
+}
+
+.status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #44cf6c;
+}
+
+.notion-status-chip.offline .status-dot {
+  background-color: var(--notion-red);
+}
+
+.status-text {
+  font-size: 11px;
+  color: var(--notion-text-muted);
+  font-weight: 500;
+}
+
+.notion-icon-btn {
+  background: none;
+  border: none;
+  color: var(--notion-text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s ease;
+}
+
+.notion-icon-btn:hover {
+  background-color: var(--notion-card-hover);
+  color: var(--notion-text-primary);
+}
+
+/* ==========================================================================
+   2. Scrollable Body & Section Layout (Starts immediately with Active Tweet)
+   ========================================================================== */
+
+.notion-scroll-body {
+  flex: 1;
+  padding: 10px 14px 16px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.notion-analysis-view {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.notion-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--notion-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 10px;
+  margin-bottom: 2px;
+  padding-left: 2px;
+}
+.notion-section-title:first-child {
+  margin-top: 0;
+}
+
+/* Base Notion Block */
+.notion-block {
+  background-color: var(--notion-card-bg);
+  border: 1px solid var(--notion-border);
+  border-radius: 5px;
+  padding: 10px 12px;
+}
+
+/* ==========================================================================
+   3. Active Tweet Quote Block
+   ========================================================================== */
+
+.notion-quote-block {
+  display: flex;
+  gap: 10px;
+  background-color: #222222;
+  border: 1px solid var(--notion-border);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+.notion-quote-bar {
+  width: 3px;
+  background-color: var(--notion-blue);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.notion-quote-content {
+  flex: 1;
+}
+
+.notion-tweet-text {
+  font-size: 12.5px;
+  color: var(--notion-text-primary);
+  line-height: 1.5;
+  font-style: normal;
+}
+
+/* ==========================================================================
+   4. Verdict Block & Blue Meter
+   ========================================================================== */
+
+.verdict-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.verdict-tag-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.notion-pill {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-color: var(--notion-blue-bg);
+  color: var(--notion-blue);
+  border: 1px solid var(--notion-blue-border);
+}
+
+.notion-pill.negative {
+  background-color: var(--notion-red-bg);
+  color: var(--notion-red);
+  border-color: rgba(224, 108, 117, 0.25);
+}
+
+.notion-pill.positive {
+  background-color: var(--notion-blue-bg);
+  color: var(--notion-blue);
+  border-color: var(--notion-blue-border);
+}
+
+.notion-pill.neutral {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--notion-text-muted);
+  border-color: var(--notion-border);
+}
+
+.notion-sub-pill {
+  font-size: 10.5px;
+  color: var(--notion-text-muted);
+  background-color: rgba(255, 255, 255, 0.04);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--notion-border);
+}
+
+.verdict-pct {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--notion-text-primary);
+}
+
+.notion-bar-track {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.notion-bar-fill {
+  height: 100%;
+  background-color: var(--notion-blue);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* ==========================================================================
+   5. Notion SHAP Callout Block & Factor Table
+   ========================================================================== */
+
+.notion-callout-block {
+  background-color: #242424;
+  border: 1px solid var(--notion-border);
+  border-radius: 5px;
+  padding: 10px 12px;
+}
+
+.notion-callout-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+
+.notion-sparkle-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background-color: var(--notion-blue-bg);
+  color: var(--notion-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notion-callout-heading {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--notion-text-primary);
+}
+
+.notion-callout-summary {
+  font-size: 12px;
+  color: var(--notion-text-secondary);
+  line-height: 1.55;
+  margin-bottom: 9px;
+}
+
+.notion-shap-table {
+  background-color: #1f1f1f;
+  border: 1px solid var(--notion-border);
+  border-radius: 4px;
+  padding: 7px 9px;
+}
+
+.notion-shap-table-title {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--notion-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 5px;
+}
+
+.notion-shap-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  font-size: 11.5px;
+}
+.notion-shap-item:last-child {
+  border-bottom: none;
+}
+
+.shap-name {
+  color: var(--notion-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.shap-score {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.shap-score.supports {
+  color: var(--notion-blue);
+}
+
+.shap-score.opposes {
+  color: var(--notion-red);
+}
+
+.shap-score.neutral {
+  color: var(--notion-text-muted);
+}
+
+/* ==========================================================================
+   6. Notion Properties & Model Signals (Premium Vector Icons)
+   ========================================================================== */
+
+.notion-prop-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+  font-size: 12px;
+  transition: background-color 0.12s ease;
+}
+.notion-prop-row:last-child {
+  border-bottom: none;
+}
+
+.notion-prop-key {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--notion-text-muted);
+}
+
+.notion-prop-svg {
+  width: 14px;
+  height: 14px;
+  color: var(--notion-text-muted);
+  flex-shrink: 0;
+  transition: color 0.12s ease;
+}
+
+.notion-prop-row:hover .notion-prop-svg {
+  color: var(--notion-blue);
+}
+
+.notion-prop-val {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--notion-text-primary);
+  background-color: rgba(255, 255, 255, 0.04);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--notion-border);
+}
+
+.notion-prop-val.badge-blue {
+  background-color: var(--notion-blue-bg);
+  color: var(--notion-blue);
+  border-color: var(--notion-blue-border);
+}
+
+.notion-prop-val.badge-red {
+  background-color: var(--notion-red-bg);
+  color: var(--notion-red);
+  border-color: rgba(224, 108, 117, 0.25);
+}
+
+.notion-prop-val.badge-amber {
+  background-color: var(--notion-amber-bg);
+  color: var(--notion-amber);
+  border-color: rgba(229, 192, 123, 0.25);
+}
+
+/* ==========================================================================
+   7. Notion Probabilities Bars
+   ========================================================================== */
+
+.notion-prob-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 11.5px;
+}
+.notion-prob-row:last-child {
+  margin-bottom: 0;
+}
+
+.notion-prob-label {
+  width: 55px;
+  color: var(--notion-text-muted);
+}
+
+.notion-prob-track {
+  flex: 1;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.notion-prob-fill {
+  height: 100%;
+  background-color: var(--notion-blue);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.notion-prob-num {
+  width: 28px;
+  text-align: right;
+  font-weight: 500;
+  color: var(--notion-text-primary);
+  font-family: ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ==========================================================================
+   8. Notion Chips (Tags)
+   ========================================================================== */
+
+.notion-chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.notion-chip {
+  font-size: 11px;
+  color: var(--notion-text-secondary);
+  background-color: rgba(255, 255, 255, 0.04);
+  padding: 2px 7px;
+  border-radius: 3px;
+  border: 1px solid var(--notion-border);
+}
+
+/* ==========================================================================
+   9. Empty State
+   ========================================================================== */
+
+.notion-empty-view {
+  margin: auto;
+  text-align: center;
+  padding: 40px 14px;
+}
+
+.notion-page-icon-empty {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: var(--notion-card-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--notion-text-muted);
+  margin-bottom: 12px;
+  border: 1px solid var(--notion-border);
+}
+
+.notion-empty-heading {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--notion-text-primary);
+  margin-bottom: 6px;
+}
+
+.notion-empty-sub {
+  font-size: 12px;
+  color: var(--notion-text-muted);
+  line-height: 1.5;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   10. Notion Bottom Footer (Clean, Matches Screenshot)
+   ========================================================================== */
+
+.notion-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  border-top: 1px solid var(--notion-border);
+  background-color: var(--notion-header-bg);
+  font-size: 11px;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.notion-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--notion-text-muted);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.notion-user-badge {
+  width: 17px;
+  height: 17px;
+  border-radius: 3px;
+  background-color: #333333;
+  color: var(--notion-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.notion-user-name {
+  font-weight: 500;
+  color: var(--notion-text-primary);
+}
+
+.notion-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.notion-footer-icon {
+  color: var(--notion-text-muted);
+  cursor: pointer;
+  padding: 3px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s ease;
+}
+
+.notion-footer-icon:hover {
+  background-color: var(--notion-card-hover);
+  color: var(--notion-text-primary);
+}
+
+.notion-footer-icon.blue-sparkle {
+  color: var(--notion-blue);
+}
+
+.notion-footer-icon.blue-sparkle:hover {
+  background-color: var(--notion-blue-bg);
+}

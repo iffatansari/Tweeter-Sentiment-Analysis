@@ -106,11 +106,10 @@ def get_backend_model_info():
                 "cardiffnlp/twitter-roberta-base-sentiment",
             "local_path":
                 str(SENTIMENT_MODEL_DIR),
-            "ready":
-                (
-                    SENTIMENT_MODEL_DIR
-                    / "model.safetensors"
-                ).exists(),
+            "ready": (
+                (SENTIMENT_MODEL_DIR / "model.safetensors").exists()
+                or (SENTIMENT_MODEL_DIR / "pytorch_model.bin").exists()
+            ),
         },
         "sarcasm_model":
             sarcasm_model_info(),
